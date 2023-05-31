@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Page</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">  
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
+    <style>
+
+                
+        #contact
+        {
+            /* background: #efefef; */
+            padding-top: 40px;
+            margin: 30px 50px;
+            padding-bottom: 40px;
+            /* color: #777; */
+            background-color: rgb(214, 212, 212)
+
+        }
+
+        /* ::placeholder
+        {
+            color: #999!important;
+        } */
+
+        .follow
+        {
+            background: #fff;
+            padding: 10px;
+            margin: 15px;
+        }
+
+        .contact-info .fa
+        {
+            margin: 10px;
+            color: #007bff;
+            font-weight: bold;
+        }
+
+        /* .cont{
+            background-color: rgb(214, 212, 212)
+        } */
+        .content{
+            content: '';
+            background: rgb(0, 123, 255);
+            display: block;
+            height: 3px;
+            width: 170px;
+            margin: 5px auto 15px;
+        }
+        .info{
+            background:rgb(233, 231, 231);
+            padding: 15px;
+            margin: 0px auto 18px;
+        }
+        .form-group{
+            margin: 3px 0px;
+            padding: 8px 0px;
+        }
+    </style>
+</head>
+<body>
+<section id="contact">	
+	<div class="container">
+        <h1 class="text-center mt-4">Get In Touch</h1>
+        <div class="content"></div>
+        <div class="row">
+            <div class="col-md-6">
+                <form class="contact-form" target="/contact" method="post">
+                    {% csrf_token %}
+                    <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Your Name.." name="name" required>
+                    </div>
+                    <div class="form-group">
+                    <input type="email" class="form-control" placeholder="Email.." name="email" required>
+                    </div>
+                    <div class="form-group">
+                    <input type="number" class="form-control" placeholder="Phone no." name="phone" required>
+                    </div>
+                    <div class="form-group" >
+                    <textarea class="form-control" rows="4" placeholder="Message.." name="message" id="message" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+            <div class="col-md-6 contact-info">
+                <div class="follow"><b><i class="fa fa-map-marker"></i>  </b>Khadka Road Near Sky Gym, Bhusawal</div>
+                <div class="follow"><b><i class="fa fa-mobile"></i>  </b>(+91) 7862097585</div>
+                <div class="follow"><b><i class="fa fa-envelope"></i>  </b>shoezone@gmail.com</div>
+                    
+                    
+                <div class="follow"><label><b>Get Social </b></label>
+                    <a class="btn btn-primary ml-2 " style="width:50px;" href="https://www.facebook.com/" role="button"><i class="fab fa-facebook-f"></i></a>
+                    <a class="btn btn-primary" style="background-color: rgb(85, 172, 238); width:50px" href="https://twitter.com/login" role="button"><i class="fab fa-twitter "></i></a>
+                    <a class="btn btn-primary" style="background-color: rgb(221, 75, 57); width: 50px;" href="https://myaccount.google.com/" role="button"><i class="fab fa-google"></i></a>
+                    <a class="btn btn-primary" style="background-color: rgb(172, 43, 172); width: 50px;" href="https://www.instagram.com/accounts/login/" role="button"><i class="fab fa-instagram"></i><a>
+                </div>
+            </div>            
+        </div> 
+    </div>
+</section>
+
+    <!-- <div class="cont py-4 me-lg-auto m-4" >
+        <section id="contact">	
+            <div class="container">
+                <h1 class="text-center mt-4"><b>Get In Touch</b> </h1>
+                <div class="content"></div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <form class="contact-form" target=''>
+                        <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Your Name.." required>
+                        </div>
+                        <div class="form-group">
+                        <input type="tel" class="form-control" placeholder="Phone no." required>
+                        </div>
+                        <div class="form-group">
+                        <input type="email" class="form-control" placeholder="Email.." required>
+                        </div>
+                        <div class="form-group">
+                        <textarea class="form-control" rows="4" placeholder="Message.." required></textarea>
+                        </div>           
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>
+                    </div>
+    
+                    <div class="col-md-6 contact-info">
+                        <div class="info"><i class="fa fa-map-marker"></i>     Streep Road,Copenhagen,Denmark</div>
+                        <div class="info"><i class="fa fa-mobile"></i>   (+91) 7862097585</div>
+                        <div class="info"><i class="fa fa-envelope"></i>    sportscompass@gmail.com</div>
+                        <div class="info"><strong>Get Social</strong><label> </label>
+
+                        
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div> -->
+</body>
+</html>
+
+{% comment %} 
+{% extends 'base.html' %}
+{% block title %}Contact{% endblock title %}
+{% block body %}
+<div class="cont py-4 me-lg-auto m-2" style="background-color: rgb(214, 212, 212); height:430px;">
+    <div class="container">
+                <h1 class="text-center"><b>Get In Touch</b> </h1>
+                <div style="content: '';background: rgb(0, 123, 255);display: block;height: 3px;width: 170px;margin: 5px 475px;" ></div>
+                <div class="row">
+                    <div class="col-md-6 ">
+                        <form class="contact-form " style='padding: 15px;' action='/contact' method='post'>
+                            {% csrf_token %}
+                        <div class="form-group">
+                        <input type="text" name='name'  class="form-control p-4" placeholder="Your Name.." required>
+                        </div>
+                        <div class="form-group">
+                        <input type="phone" name='phone' class="form-control" placeholder="Phone no." required>
+                        </div>
+                        <div class="form-group">
+                        <input type="email" name='email'  class="form-control" placeholder="Email.." required>
+                        </div>
+                        <div class="form-group">
+                        <textarea class="form-control" rows="3" placeholder="Message.." required></textarea>
+                        </div>           
+                        <button type="submit" name='desc'  class="btn btn-primary">Submit</button>
+                        </form>
+                    </div>
+    
+                    <div class="col-md-6 contact-info">
+                        <div class="" style="background:rgb(233, 231, 231);
+                        padding: 15px;margin: 0px auto 18px;"><i class="fa fa-map-marker"></i>     Streep Road,Copenhagen, Pune </div>
+                        <div class="" style="background:rgb(233, 231, 231);
+                        padding: 15px;margin: 0px auto 18px;"><i class="fa fa-mobile"></i>   (+91) 7862097585</div>
+                        <div class="" style="background:rgb(233, 231, 231);
+                        padding: 15px;margin: 0px auto 18px;"><i class="fa fa-envelope"></i>    ecommerce123@gmail.com</div>
+                        <div class="" style="background:rgb(233, 231, 231);
+                        padding: 15px;margin: 0px auto 18px;"><strong>Get Social</strong><label> </label>
+
+                            <a class="btn btn-primary ml-2 " style="width:50px;" href="https://www.facebook.com/" role="button"><i class="fab fa-facebook-f"></i></a>
+                            <a class="btn btn-primary" style="background-color: rgb(85, 172, 238); width:50px" href="https://twitter.com/login" role="button"><i class="fab fa-twitter "></i></a>
+                            <a class="btn btn-primary" style="background-color: rgb(221, 75, 57); width: 50px;" href="https://myaccount.google.com/" role="button"><i class="fab fa-google"></i></a>
+                            <a class="btn btn-primary" style="background-color: rgb(172, 43, 172); width: 50px;" href="https://www.instagram.com/accounts/login/" role="button"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+    </div>
+
+</div>
+{% endblock body %} {% endcomment %}

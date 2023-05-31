@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-4scale=1.0">
+    <title>Footer</title>
+</head>
+<body>
+  <div class="main bg-primary bg-opacity-25">
+    <div class="container-flex ms-4 py-4">
+      <footer class="py-4 mx-4">
+        <div class="row ms-4">
+          <div class="col-md-2 col-8 ms-4 my-2">
+            <h5>Get to Know Us</h5>
+            <ul class="nav flex-column ">
+              <li class="nav-item mb-2"><a href="/about" class="nav-link p-0 text-body-secondary">About Us</a></li>
+              <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Products</a></li>
+              <li class="nav-item mb-2"><a href="/services" class="nav-link p-0 text-body-secondary">Services</a></li>
+            </ul>
+          </div>
+    
+          <div class=" col-md-2 my-2">
+            <h5>Connect With Us</h5>
+            <ul class="nav flex-column">
+              <li class="nav-item mb-2"><a
+                  href="https://www.facebook.com/login/?privacy_mutation_token=eyJ0eXBlIjowLCJjcmVhdGlvbl90aW1lIjoxNjgxMDI5NjcyLCJjYWxsc2l0ZV9pZCI6MjY5NTQ4NDUzMDcyMDk1MX0%3D"
+                  class="nav-link p-0 text-body-secondary">Facebook</a></li>
+              <li class="nav-item mb-2"><a href="https://www.instagram.com/accounts/login/"
+                  class="nav-link p-0 text-body-secondary">Instagram</a></li>
+              <li class="nav-item mb-2"><a
+                  href="https://twitter.com/i/flow/login?input_flow_data=%7B%22requested_variant%22%3A%22eyJsYW5nIjoiZW4ifQ%3D%3D%22%7D"
+                  class="nav-link p-0 text-body-secondary">Twitter</a></li>
+            </ul>
+          </div>
+    
+          <div class="col-md-2 my-2">
+            <h5>Let Us Help You</h5>
+            <ul class="nav flex-column">
+              <li class="nav-item mb-2"><a href="/login" class="nav-link p-0 text-body-secondary">Your Account</a></li>
+              <li class="nav-item mb-2"><a href="/contact" class="nav-link p-0 text-body-secondary">Contact Us</a></li>
+            </ul>
+          </div>
+    
+          <div class="col-md-4 offset-md-1 my-2">
+            <form>
+              {% csrf_token %}
+              <h5>Subscribe to our newsletter</h5>
+              <p>Monthly digest of what's new and exciting from us.</p>
+              <div class="d-flex flex-column flex-sm-row w-70 gap-1">
+                <label for="newsletter1" class="visually-hidden">Email address</label>
+                <input id="newsletter1" type="text" class="form-control" placeholder="Email address" required>
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" type="button">Subscribe</button>
+              </div>
+            </form>
+          </div>
+
+          <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Info</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                <div class="m-2 p-3">
+                  <p>Thank you for subscribing our news letter. You will recieve latest updates from us.
+                </div>
+                </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-flex bg-primary text-dark bg-opacity-50">
+      <div class="d-flex flex-column flex-sm-row justify-content-center py-4 border-top ">
+        <p class='ms-4 fs-5 text-dark'>© 2001-2023 Ecom.com, Inc. All rights reserved.</p>
+      </div>
+      </footer>
+  </div>
+  </div>
+</body>
+</html>

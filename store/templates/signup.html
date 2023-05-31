@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SignUp Page</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+  <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
+  <style>
+    .form {
+      height: 750px;
+      width: 550px;
+      position: absolute;
+      transform: translate(-50%, -50%);
+      top: 60%;
+      left: 50%;
+      border-radius: 10px;
+      border: 2px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
+      padding: 10px;
+      margin: 3px;
+
+    }
+
+    .img {
+      width: 670px;
+      height: 150px;
+    }
+
+    .form-label {
+      margin-bottom: 0px;
+      display: block;
+      font-size: 15px;
+      font-weight: 500;
+    }
+
+    .form-control {
+      margin-top: 0px;
+    }
+
+    .head {
+      margin-top: 0px;
+    }
+  </style>
+</head>
+
+<body>
+  <form action="/signup" method="post" class="bg-primary p-2 text-dark bg-opacity-25 row g-3 form">
+    {% csrf_token %}
+
+    <img src="/static/createaccount.png" alt="signup" class='img'>
+    {% if error %}
+    <div class="alert alert-danger" role="alert">
+      {{error}}
+    </div>
+    {% endif %}
+
+    <label for="inputEmail4" class="form-label">First Name</label>
+    <input type="text" class="form-control" aria-label="First name" value="{{values.first_name}}" placeholder="First Name" name='firstname'>
+
+    <label for="inputEmail4" class="form-label">Last Name</label>
+    <input type="text" class="form-control" aria-label="Last name" value="{{values.last_name}}" placeholder="Last Name" name='lastname'>
+
+
+    <label for="inputEmail4" class="form-label">Mobile Number</label>
+    <input type="phone" class="form-control" aria-label="phone"  value="{{values.phone}}" placeholder="(+91) 9876543210" name='phone'>
+
+    <label for="inputEmail4" class="form-label">Email</label>
+    <input type="email" class="form-control" name='email' id="inputEmail4" value="{{values.email}}"  placeholder="abcd1234@gmail.com" required>
+
+    <label for="inputPassword4" class="form-label">Password</label>
+    <input type="password" class="form-control" id="inputPassword4" placeholder="At least 6 characters" name='password'>
+
+    <button type="submit" class="btn btn-primary btn-sm mx-auto col-6">Continue</button>
+
+    <hr>
+    <h6 class='head'>Already have an account? <a class="" href="/login" role="button">Log In</a></h6>
+  </form>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>
+
+
+
+{% comment %} <!-- {% extends 'base.html' %}
+{% block css %}
+.form{
+    height: 700px;
+    width: 550px; 
+    position: absolute; 
+    transform: translate(-50%,-50%); 
+    top: 82%; left: 50%; 
+    border-radius: 10px; 
+    border: 2px solid rgba(255,255,255,0.1); 
+    box-shadow: 0 0 40px rgba(8,7,16,0.6); 
+    padding: 10px; 
+    margin:3px;
+
+}
+.img{
+    width:670px;
+     height:150px;
+}
+.form-label{
+    margin-bottom:0px; 
+    display: block; 
+    margin-top: 5px; 
+    font-size: 15px; 
+    font-weight: 500;
+}
+.form-control{
+    margin-top:0px;
+}
+
+{% endblock css %}
+{% block body %}
+<form action="" method="post" class="bg-primary p-2 text-dark bg-opacity-10 row g-3 form" >
+    {% csrf_token %}   
+    <img src="/static/createaccount.png" alt="signup" class='img'>
+
+    <label for="inputEmail4" class="form-label">First Name</label>
+    <input type="text" class="form-control" aria-label="First name" placeholder="First Name" name='firstname' required>
+
+
+    <label for="inputEmail4" class="form-label" >Last Name</label>
+    <input type="text" class="form-control" aria-label="Last name" placeholder="Last Name" name='lastname' required>
+
+    <label for="inputEmail4" class="form-label" >Email</label>
+    <input type="email" class="form-control" name='email' id="inputEmail4" placeholder="abcd1234@gmail.com" required>
+
+    <div class="col-md-12">
+      <label for="validationCustomUsername" class="form-label" >Username</label>
+      <div class="input-group has-validation">
+        <span class="input-group-text" id="inputGroupPrepend">@</span>
+        <input type="text" name='username' class="form-control" placeholder="Username" id="validationCustomUsername" aria-describedby="inputGroupPrepend" required>
+        <div class="invalid-feedback" required>
+          Please choose a username.
+        </div>
+      </div>
+    </div>
+    
+    <label for="inputPassword4" class="form-label" >Password</label>
+    <input type="password" class="form-control" id="inputPassword4" placeholder="************" name='password1' required>
+
+    <button type="submit" class="btn btn-primary" >Create An Account</button>
+
+    <hr>
+    <h6>Already Have Account?    <a class="" href="/login" role="button">Log In</a></h6>
+</form>
+{% endblock body %} --> {% endcomment %}

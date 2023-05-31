@@ -1,0 +1,207 @@
+{% extends 'base.html' %}
+{% block body %}
+{% load cart %}
+
+<div class="container bg-primary text-dark bg-opacity-10">
+    <div class="border rounded p-4 m-4">
+         <p class=" pl-4 ml-4 btn btn-warning">Your Cart</p>
+         <hr>
+         <table class="table items">
+             <thead>
+                 <tr>
+                     <th>Sno.</th>
+                     <th>Image</th>
+                     <th>Product</th>
+                     <th>Unit Price</th>
+                     <th>Quantity</th>
+                     <th>Total</th>
+                 </tr>
+             </thead>
+             <tbody>
+                 
+                 {% for product in products %}
+                 <tr>
+                     <td><b>{{forloop.counter}}</b></td>
+                     <td><img style="height: 80px;" class="rounded-circle" src="{{product.image.url}}" alt=""></td>
+                     <td><b>{{product.name}}</b></td>
+                     <td><b>Rs. {{product.price}}</b></td>
+                     <td><b>{{product|cart_quantity:request.session.cart}}</b></td>
+                     <td><b>Rs. {{product|price_total:request.session.cart}}</b></td>
+                     <td><a href="{% url 'deletefromCart' product.id %}"><button type="submit" name="delete">Delete</button></a></td>
+                 </tr>
+ 
+                 {% endfor %}
+                
+             </tbody>
+ 
+             <tfoot>
+                 <tr>
+                     <th colspan="4"></th>
+                     <th id="price" colspan="">Total Price</th>
+                     <th>Rs. {{products|total_cart_price:request.session.cart}}</th>
+                 </tr>
+             </tfoot>
+         </table>
+         <hr>
+         <div class="m-3 p-3">
+             <button type='button' data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-primary border rounded  col-lg-3 float-right">Place Order</button>
+         </div>
+    </div>
+</div>
+
+  
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal-dialog">
+    <div class="modal-content">
+    <div class="modal-header bg-primary text-dark bg-opacity-50">
+        <h1 class="modal-title" id="exampleModalLabel">Check Out Form</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+    <div class="modal-body bg-primary text-dark bg-opacity-25">
+    <div class="">
+        <form action="/checkout/" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="" class="col-md-3">Name</label>
+                <input type="text" name="name" class="form-control" aria-describedby="helpId">
+
+                <label for="" class='mt-1 col-md-3'>Email</label>
+                <input type="email" name="email" class="form-control" aria-describedby="helpId">
+
+                <label for="" class='mt-1 col-md-3'>Address</label>
+                <input type="text" name="address" class="form-control" aria-describedby="helpId">
+
+                <label for="" class='mt-1 col-md-3'>Mobile Number</label>
+                <input type="tel" name="phone" class="form-control" aria-describedby="helpId">
+             
+            <h4 class="mb-2 my-2">Payment</h4>
+
+          <div class="mx-4">
+            <div class="form-check">
+              <input id="credit" name="paymentMethod" type="radio" class="form-check-input" checked="" required="">
+              <label class="form-check-label" for="credit">Credit card</label>
+            </div>
+            <div class="form-check">
+              <input id="debit" name="paymentMethod" type="radio" class="form-check-input" required="">
+              <label class="form-check-label" for="debit">Debit card</label>
+            </div>
+            <div class="form-check">
+              <input id="paypal" name="paymentMethod" type="radio" class="form-check-input" required="">
+              <label class="form-check-label" for="paypal">PayPal</label>
+            </div>
+          </div>
+
+          <div class="row mx-2">
+            <div class="col-md-6">
+              <label for="cc-name" class="form-label">Name on card</label>
+              <input type="text" class="form-control" name='cc-name' id="cc-name">
+              <small class="text-body-secondary">Full name as displayed on card</small>
+              <div class="invalid-feedback">
+                Name on card is required
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <label for="cc-number" class="form-label">Credit card number</label>
+              <input type="text" class="form-control" name='cc-number' id="cc-number">
+              <div class="invalid-feedback">
+                Credit card number is required
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <label for="cc-expiration" class="form-label">Expiration</label>
+              <input type="text" class="form-control" name='cc-expiration' id="cc-expiration">
+              <div class="invalid-feedback">
+                Expiration date required
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <label for="cc-cvv" class="form-label">CVV</label>
+              <input type="text" class="form-control" id="cc-cvv">
+              <div class="invalid-feedback">
+                Security code required
+              </div>
+            </div>
+          </div>
+                         
+            </div>
+            {% comment %} <input type="submit" class="btn float-left btn-outline-primary mt-4" value="Check out"> {% endcomment %}
+    </div>
+    </div>
+    <div class="modal-footer bg-primary text-dark bg-opacity-50">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Check Out</button>
+    </div>
+</form>
+    </div>
+</div>
+</div>
+{% endblock body %}
+
+{% block js %}
+<script>
+
+    {% comment %} deleteProduct: function() {
+        var self = this;
+        if( self.$formCart.length ) {
+            var cart = this._toJSONObject( this.storage.getItem( this.cartName ) );
+            var items = cart.items;
+
+            $( document ).on( "click", ".items a", function( e ) {
+                e.preventDefault();
+                var productName = $( this ).data( "product" );
+                var newItems = [];
+                for( var i = 0; i < items.length; ++i ) {
+                    var item = items[i];
+                    var product = item.product;	
+                    if( product == productName ) {
+                        items.splice( i, 1 );
+                    }
+                }
+                newItems = items;
+                var updatedCart = {};
+                updatedCart.items = newItems;
+
+                var updatedTotal = 0;
+                var totalQty = 0;
+                if( newItems.length == 0 ) {
+                    updatedTotal = 0;
+                    totalQty = 0;
+                } else {
+                    for( var j = 0; j < newItems.length; ++j ) {
+                        var prod = newItems[j];
+                        var sub = prod.price * prod.qty;
+                        updatedTotal += sub;
+                        totalQty += prod.qty;
+                    }
+                }
+
+                self.storage.setItem( self.total, self._convertNumber( updatedTotal ) );
+                self.storage.setItem( self.shippingRates, self._convertNumber( self._calculateShipping( totalQty ) ) );
+
+                self.storage.setItem( self.cartName, self._toJSONString( updatedCart ) );
+                $( this ).parents( "tr" ).remove();
+                self.$subTotal[0].innerHTML = self.currency + " " + self.storage.getItem( self.total );
+            });
+        }
+    }, {% endcomment %}
+
+
+    
+        var current_tasks = document.querySelectorAll(".items");
+        {% comment %} for(var i=0; i<current_tasks.length; i++) {% endcomment %}
+        {
+        current_tasks[delete].onclick = function()
+            {
+                this.remove();
+                request.session.cart.keys =  0;
+            }
+
+        {% comment %} } {% endcomment %}
+        
+
+</script>
+{% endblock js %}

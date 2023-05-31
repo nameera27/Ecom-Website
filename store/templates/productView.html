@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+{% block title%} {{product.name}} - My Awesome Cart{% endblock %}
+
+{% block css %}
+.rating {
+    width: 300px;
+    margin: 0 auto 1em;
+    font-size: 45px;
+    overflow:hidden;
+  }
+  .rating input {
+    float: right;
+    opacity: 0;
+    position: absolute;
+  }
+  .rating a, 
+  .rating label {
+              float:right;
+              color: #aaa;
+              text-decoration: none;
+              -webkit-transition: color .4s;
+              -moz-transition: color .4s;
+              -o-transition: color .4s;
+              transition: color .4s;
+          }
+  .rating label:hover ~ label,
+  .rating input:focus ~ label,
+  .rating label:hover,
+          .rating a:hover,
+          .rating a:hover ~ a,
+          .rating a:focus,
+          .rating a:focus ~ a		{
+              color: orange;
+              cursor: pointer;
+          }
+          .rating2 {
+              direction: rtl;
+          }
+          .rating2 a {
+              float:none;
+          }
+{% endblock css %}
+
+{% block body %}
+<div class="container py-4 pb-4">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="row">
+                <img src="{{product.image.url}}" width="233px" height="385px" >
+                <div class="rating rating2">
+                    <a href="#5" title="Give 5 stars" data-value="5">★</a>
+                    <a href="#4" title="Give 4 stars" data-value="4">★</a>
+                    <a href="#3" title="Give 3 stars" data-value="3">★</a>
+                    <a href="#2" title="Give 2 stars" data-value="2">★</a>
+                    <a href="#1" title="Give 1 star" data-value="1">★</a>
+                </div>
+            </div>
+        </div>
+
+        
+    <div class="col-md-8 mt-4">
+        <h1>{{product.name}}</h1>
+        <hr>
+        <p><strong>Category : </strong> {{product.category}}</p>
+        <strong>Description : </strong>
+        <p>{{product.description}}</p>        
+        <h5><b>Rs.{{product.price}} </b></h5>
+        
+
+        <div class="col-md-8 mt-4">
+            <a href='/order'><button class="btn btn-primary  w-50">Buy Now</button></a>
+            <span id="divpr{{i.id}}" class="divpr">
+                <button id="pr{{i.id}}" class="btn btn-primary cart w-50 mt-2">Add To Cart</button>
+              </span>
+        </div>
+    </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block js %}
+
+$(".rating a").on('click', function(e){
+	let value = $(this).data('value');
+   $.ajax({
+      url: "some_url",
+      type: 'POST',
+      data: {'rating': value},
+      success: function (d){
+       // some processing
+      }
+   })
+});
+
+{% endblock js %}

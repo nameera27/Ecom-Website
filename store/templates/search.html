@@ -1,0 +1,123 @@
+{% extends 'base.html' %}
+{% block css %}
+.col-md-3
+{
+display: inline-block;
+margin-left:-4px;
+}
+
+.carousel-indicators .active {
+background-color: blue;
+}
+
+.col-md-3 img{
+margin: 0px 1px;
+width: 282px;
+height: 250px;
+}
+
+body .carousel-indicators li{
+background-color: blue;
+}
+
+body .carousel-indicators{
+bottom: -35px;
+}
+.carousel-control-prev,
+.carousel-control-next{
+top:auto;
+bottom:auto;
+padding-top:180px;
+{% comment %} padding-left:13px; {% endcomment %}
+{% comment %} padding-right:8px; {% endcomment %}
+}
+body .no-padding{
+padding-left: 0;
+padding-right: 0;
+}
+{% endblock css %}
+
+
+{% block body %}
+{% load cart %}
+
+<div class="container mb-4">
+    <h2 class='text-black mt-4' >Search results : </h2>
+    {% for prod, range, nslides in allProds %}
+    <h3 class='my-4'>{{prod.0.category}}</h3>
+    <div class='row'>
+        <div id="demo{{forloop.counter}}" class="col carousel slide my-2">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#demo{{forloop.counter}}" data-bs-slide-to="0" aria-label="Slide 0" class="active" aria-current="true"></button>
+            {% for i in range %}
+            <button type="button" data-bs-target="#demo{{forloop.parentloop.counter}}" data-bs-slide-to="{{i}}"      aria-label="Slide {{i}}"></button>
+            {% endfor %}
+        </div>
+
+        <div class="carousel-inner no-padding">
+            <div class="carousel-item active">
+
+                {% for product in prod %}
+                <div class="col-xs-3 col-sm-3 col-md-3">
+                    <div class="card" style="width: 18rem;">
+                        <img src="{{product.image.url}}" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title" id='namepr{{product.id}}'>{{product.name}}</h5>
+                            <p class="card-text align-text-center">{{product.description|slice:"0:50"}}</p>
+
+                            <div class="card-footer p-0 no-gutters">
+                                {% if product|is_in_cart:request.session.cart %}
+                                <div class="row no-gutters">
+                                    <form action="/#{{product.id}}" class="col-3 mb-2" method="post">
+                                        {% csrf_token %}
+                                        <input hidden type="text" name='product' value='{{product.id}}'>
+                                        <input hidden type="text" name='remove' value='True'>
+                                        <input type="submit" value=" - " class="btn btn-block btn-primary border-right">
+                                    </form>
+                                    <div class="text-center col-6 btn btn-primary mb-2">{{product|cart_quantity:request.session.cart}} in Cart</div>
+                                    <form action="/#{{product.id}}" class="col-3  mb-2" method="post">
+                                        {% csrf_token %}
+                                        <input hidden type="text" name='product' value='{{product.id}}'>
+                                        <input type="submit" value=" + " class="btn btn-block btn-primary border-left">
+                                    </form>
+                                </div>
+                                {% else %}
+                                <form action="/#{{product.id}}" method="POST" class="btn-block mb-2">
+                                    {% csrf_token %}
+                                    <input hidden type="text" name='product' value='{{product.id}}'>
+                                    <input type="submit" class="btn btn-primary form-control" value="Add To Cart">
+                                </form>
+                                {% endif %}           
+                            </div>
+                            <a href="products/{{product.id}}"><button class="btn btn-primary col-12">Quick View</button></a>
+
+                        </div>
+                    </div>
+                </div>
+                {% if forloop.counter|divisibleby:4 and forloop.counter > 0 and not forloop.last %}
+            </div>
+            <div class="carousel-item">
+                {% endif %}
+
+                {% endfor %}
+            </div>
+        </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#demo{{forloop.counter}}"
+                data-bs-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#demo{{forloop.counter}}"
+                data-bs-slide="next">
+        <span class="carousel-control-next-icon"></span>
+        </button>
+    </div>
+    {% endfor %}
+</div>
+{% endblock body %} 
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+
+</body>
+</html>

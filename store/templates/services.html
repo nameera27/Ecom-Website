@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services Page</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">  
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
+	<style>
+
+		#services
+		{
+			background: rgb(59, 58, 58);
+			background-size: cover;
+			background-position: center;
+			color:#555!important;
+			background-attachment: fixed;
+			padding-top:60px;
+			/* margin-top:50px; */
+			margin:50px;
+			border-radius: 15px;
+			padding-bottom: 50px;
+		}
+		#services h1
+		{
+			text-align: center;
+			color:#fff!important;
+			padding-bottom: 10px;
+		}
+
+		#services h1::after
+		{
+			content: '';
+			background:#efefef;
+			display: block;
+			height:3px;
+			width:170px;
+			margin: 20px auto 5px;
+		}
+		#services h3
+		{
+			font-weight: 400;
+			color: white;
+			margin: auto;
+		}
+		#services p
+		{
+			font-weight: 400;
+			color: white;
+			margin: auto;
+			margin-top: 20px;
+		}
+		#services i
+		{
+			
+			color: white;
+		}
+		.icon
+		{
+			font-size:40px;
+			margin:20px auto;
+			padding: 20px;
+			height: 80px;
+			width:80px;
+			border:1px solid #fff;
+			border-radius:50%;
+		}
+		.services .col-md-4:hover{
+			background:#007bff;
+			cursor: pointer;
+			transition: 0.7s;
+			
+		}
+	</style>
+</head>
+<body>
+	<section id="services">
+		<div class="container">
+			<h1>Our Services</h1>
+			<div class="row services" >
+				<div class= "col-md-4 text-center">
+					<div class="icon">
+					<i class="fa fa-phone" ></i>
+					</div>
+					<h3> 24/7 Support</h3>
+					<p>on order related queries</p>
+				</div>
+			
+				<div class="col-md-4 text-center">
+					<div class="icon">
+					<i class="fa fa-shopping-cart"></i>
+					</div>
+					<h3> Return within 30 days</h3>
+					<p>of receiving your order</p>
+				</div>
+			
+				<div class="col-md-4 text-center">
+					<div class="icon">
+					<i class="fa fa-truck"></i>
+					</div>
+					<h3>Get free delivery</h3>
+					<p>on orders above 4999</p>
+				</div>
+			</div>
+		</div>
+	</section>
+</body>
+</html>
+
+
+{% comment %} {% extends 'base.html' %}
+{% block title %}Services{% endblock title %}
+{% block body %}
+<section id="services" style="padding: 50px 10px; background-color: black; margin: 30px;">
+	<div class="container">
+		<h1 class="text-center mt-4" style="color: white; padding-bottom: 10px;"><b>Our Services</b></h1>
+		<div style="content: '';background: rgb(255, 255, 255);display: block;height: 3px;width: 170px;margin: 5px auto 50px;" ></div>
+		<div class="row" >
+			<div class= "col-md-4 text-center">
+				<div class="icon" style="font-size:40px;margin:20px auto;padding: 10px;height: 80px;
+				width:80px;	border:1px solid rgb(255, 255, 255);	border-radius:50%;">
+				<i class="fa fa-phone" style="color: white;"></i>
+				</div>
+				<h3 style="font-weight: 400;color: white;margin: 10px 0px;"> 24/7 Support</h3>
+				<p style="font-weight: 400;color: white;margin: 10px 0px;">on order related queries</p>
+			</div>
+		
+			<div class="col-md-4 text-center">
+				<div class="icon" style="font-size:40px;margin:20px auto;padding: 10px;
+				height: 80px;width:80px;border:1px solid rgb(255, 255, 255);border-radius:50%;">
+				<i class="fa fa-shopping-cart" style="color: white;"></i>
+				</div>
+				<h3 style="font-weight: 400;color: white;margin: 10px 0px;"> Return within 30 days</h3>
+				<p style="font-weight: 400;color: white;margin: 10px 0px;">of receiving your order</p>
+			</div>
+		
+			<div class="col-md-4 text-center">
+				<div class="icon" style="font-size:40px;margin:20px auto;padding: 10px;
+				height: 80px;	width:80px;	border:1px solid rgb(255, 255, 255);	border-radius:50%;">
+				<i class="fa fa-truck" style="color: white;"></i>
+				</div>
+				<h3 style="font-weight: 400;color: white;margin: 10px 0px;">Get free delivery</h3>
+				<p style="font-weight: 400;color: white;margin: 10px 0px;">on orders above 99Euro</p>
+			</div>
+		</div>
+	</div>
+
+</section>
+{% endblock body %} {% endcomment %}
